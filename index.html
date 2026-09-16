@@ -1,30 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GMUN Client Portal — Sign In</title>
-  <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; background-color: #f9f9f9; }
-    h2 { color: #333; }
-    input { display: block; margin: 12px 0; padding: 10px; width: 280px; border: 1px solid #ccc; border-radius: 4px; }
-    button { padding: 10px 20px; background-color: #0288d1; color: white; border: none; border-radius: 4px; cursor: pointer; }
-    button:hover { background-color: #01579b; }
-    #status { color: #d32f2f; margin-top: 8px; min-height: 20px; }
-  </style>
-</head>
-<body>
-
-  <h2>GMUN Portal</h2>
-
-  <div id="login-form">
-    <h3>Please Sign In</h3>
-    <input type="email" id="email" placeholder="Email Address" required />
-    <input type="password" id="password" placeholder="Password" required />
-    <button id="login-btn">Sign In</button>
-    <div id="status"></div>
-  </div>
-
-  <script type="module" src="login.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0c1d2f" />
+    <meta name="color-scheme" content="light" />
+    <meta name="description" content="MMUN Delegate Portal — live session status, schedule, documents and organizer support." />
+    <link rel="icon" type="image/svg+xml" href="/emblem.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Newsreader:opsz,wght@6..72,400..600&display=swap"
+    />
+    <title>MMUN · Delegate Portal</title>
+    <script>
+      // Resolve the theme before the first paint, so a delegate who picked dark
+      // never sees a white flash on load. Kept inline and tiny for that reason;
+      // useTheme() takes over once React mounts.
+      (function () {
+        try {
+          var saved = localStorage.getItem("mmun:theme");
+          document.documentElement.dataset.theme =
+            saved === "light" || saved === "dark"
+              ? saved
+              : window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+        } catch (e) {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
