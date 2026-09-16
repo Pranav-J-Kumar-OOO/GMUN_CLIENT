@@ -18,6 +18,7 @@ It's a single-page app. Whatever hosts it has to send every path back to `index.
 | `/home` | Greeting, delegate card, live session status, today's agenda, announcements, documents |
 | `/planner` | Timeline for each day with Now / Next / Upcoming / Completed states |
 | `/help` | Send a question to organizers, and see your earlier requests |
+| `/newspaper` | Conference newspaper — lead story, article grid and a full reading view |
 | `/guide` | Searchable guide with collapsible sections, plus contacts |
 | `/notifications` | Notifications built from announcements, schedule changes and session start/end |
 | `/admin` | **Organizers only.** Console for the live status, schedule, announcements, documents, help requests and delegate lookup. Delegates are redirected to `/home`, and never download the chunk. |
@@ -53,6 +54,7 @@ Components never call Firestore directly. Everything goes through `services/`.
 - `schedule/{id}`: `title`, `startAt`, `endAt`, plus optional `kind`, `location`, `description`, `committees[]`, `changeNote`, `updatedAt`, `published`
 - `announcements/{id}`: `title`, `createdAt`, plus optional `message`, `priority`, `committees[]`, `published`
 - `documents/{id}`: `title`, `url`, plus optional `type`, `description`, `downloadable` or `downloadUrl`, `committees[]`, `order`
+- `news/{id}`: `title`, `body`, `publishedAt`, `published`, plus optional `summary`, `author`, `category`, `coverUrl`. Written from the Newspaper tab in `/admin`; delegates only ever see documents with `published: true`.
 - `guide_sections/{id}`: `title`, `items[{title, body}]`, plus optional `icon` and `order`. If this collection has any documents, they replace the built-in guide.
 - `contacts/{id}`: `name`, plus optional `role`, `email`, `phone`, `order`
 
