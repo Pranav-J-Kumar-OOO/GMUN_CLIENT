@@ -11,7 +11,7 @@ interface AuthIdentity {
   displayName: string | null;
 }
 
-/** Real-time listener on users/{uid} (schema: name, committee, updatedAt). */
+/** Real-time listener on users/{uid} (schema: name, committee, portfolio, school, updatedAt). */
 export function subscribeDelegate(
   identity: AuthIdentity,
   handlers: SubscriptionHandlers<DelegateProfile>,
@@ -27,6 +27,7 @@ export function subscribeDelegate(
         exists: snap.exists(),
         name: asString(data.name) ?? fallbackName,
         committee: asString(data.committee),
+        portfolio: asString(data.portfolio),
         country: asString(data.country),
         position: asString(data.position),
         updatedAt: asDate(data.updatedAt),
